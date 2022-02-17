@@ -7,6 +7,6 @@ module.exports = {
 		if (!message.member.voice.channel) return await message.reply({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.error}-You're not in a **VoiceChannel**!`).setColor("RANDOM")] })
 		if (message.guild.me.voice.channel && message.member.voice.channelId !== message.guild.me.voice.channelId) return await message.reply({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.error}-You're not in the same **VoiceChannel**!`).setColor("RANDOM")] });
 		await message.reply({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.waiting}-Searching **of** \`${args.join(" ")}\` .`).setColor("RANDOM")] });
-		await client.distube.play(message.member.voice.channel, args.join(" "), { textChannel: message.channel });
+		await client.distube.play(message.member.voice.channel, args.join(" "), { textChannel: message.channel, member: message.member });
 	}
 }
