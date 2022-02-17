@@ -3,7 +3,7 @@ module.exports = {
 	name: "nowplaying",
 	aliases: ["np"],
 	async execute(message, args, client) {
-		const queue = player.getQueue(message.guild.id);
+		const queue = client.distube.getQueue(message.guild.id);
 		if (!queue || !queue.playing) return message.channel.send(`No music currently playing ${message.author}... try again ? ❌`);
 		const progress = queue.createProgressBar();
 		const timestamp = queue.getPlayerTimestamp();
