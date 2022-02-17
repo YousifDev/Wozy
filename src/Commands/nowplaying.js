@@ -3,11 +3,21 @@ module.exports = {
 	name: "nowplaying",
 	aliases: ["np"],
 	async execute(message, args, client) {
-		const queue = client.distube.getQueue(message.guild.id);
-		if (!queue || !queue.playing) return message.channel.send(`No music currently playing ${message.author}... try again ? ❌`);
-		const progress = queue.createProgressBar();
-		const timestamp = queue.getPlayerTimestamp();
-		if (timestamp.progress == 'Infinity') return message.channel.send(`Playing a live, no data to display 🎧`);
-		message.channel.send(`${progress} (**${timestamp.progress}**%)`);
+		if (!message.member.voice.channel) return await message.reply(`> ${client.config.emojis.error}-You're not in a **VoiceChannel**!`)
+		if (message.guild.me.voice.channel && message.member.voice.channelId !== message.guild.me.voice.channelId) return await message.reply(`> ${client.config.emojis.error}-You're not in the same **VoiceChannel**!`);
+		const queue = client.distube.getQueue(message.guildId);
+		if (!queue) return await message.reply(`> ${client.config.emojis.warning}-There's no **queue** in the server!`);
+		if (!queue.playing) return await message.reply(`> ${client.config.emojis.warning}-There's no song **playing**!`);
+		queue.songs.filter((song, num) => num < 1).map((song) => {
+			message.reply({
+				embeds: [
+					new MessageEmbed()
+						.setTitle(`> ${client.config.emojis.music} Now Playing`)
+						.setDescription(`[${song.name}](${song.url})\n> Duration [${song.formattedDuration}](${song.url}) ..\n> Requested by ${song.user}..\n**•** Channel's Name [\`${song.uploader.name}\`](${song.uploader.url}) ..\n**•** Video's Likes [\`${song.likes}\`](${song.uploader.url}) ..\n**•** Video's Views [\`${song.views}\`](${song.uploader.url}) ..`)
+						.setImage(song.thumbnail)
+						.setColor("RANDOM")
+				]
+			})
+		});
 	}
 }
