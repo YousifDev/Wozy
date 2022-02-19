@@ -13,8 +13,8 @@ const client = new Client({
 	presence: {
 		activities: [
 			{
-				name: "SOOOOOOOOOOON. 🎈",
-				type: "COMPETING"
+				name: "Wozy Server Enjoy 🎈",
+				type: "WATCHING"
 			}
 		]
 	}
@@ -49,5 +49,6 @@ client.config = require("./config");
 require("./eventsHandler")(client);
 require("./commandsHandler")(client);
 require("./musicEvents")(client, distube);
+require("./Events/error.")();
 
 client.login(Token);

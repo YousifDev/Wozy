@@ -10,7 +10,7 @@ module.exports = {
 		const queue = client.distube.getQueue(message.guildId);
 		if (!queue) return await message.channel.send({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.warning}-There's no **queue** in the server!`).setColor("RANDOM")] })
 		queue.songs.filter((song, num) => num === 0).map(async (song, num) => {
-			if (args[0] >= song.duration || args[0] < 0) return await message.channel.send({ embeds: [new MessageEmbed().setDescription(`${client.config.emojis.warning} • You can seek Track between \`0\` and \`${song.duration}\``)] });
+			if (args[0] >= song.duration || args[0] < 0) return await message.channel.send({ embeds: [new MessageEmbed().setDescription(`${client.config.emojis.warning} • You can seek Track between \`0\` and \`${song.duration}\``).setColor("RANDOM")] });
 			await client.distube.seek(message.guildId, Number(args[0]));
 			await message.channel.send({ embeds: [new MessageEmbed().setDescription(`${client.config.emojis.time} • Track has been **Seeked** to \`${args[0]}\`.`).setColor("RANDOM")] });
 		});
