@@ -1,7 +1,7 @@
 const { MessageEmbed, Message } = require("discord.js");
 module.exports = {
 	name: "repeat",
-	aliases: ["loop"],
+	aliases: ["loop", "تكرار"],
 	async execute(message, args, client) {
 		if (!args.join(" ")) return await message.reply({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.warning}-Missing **arguments**!\n**•** Provide a Type of RepeatMode **[**\`'OFF', 'SONG', 'QUEUE'\`**]**.`).setColor("RANDOM")] });
 		if (!message.member.voice.channel) return await message.reply({ embeds: [new MessageEmbed().setDescription(`> ${client.config.emojis.error}-You're not in a **VoiceChannel**!`).setColor("RANDOM")] })
