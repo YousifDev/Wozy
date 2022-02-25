@@ -49,6 +49,6 @@ client.config = require("./config");
 require("./eventsHandler")(client);
 require("./commandsHandler")(client);
 require("./musicEvents")(client, distube);
-require("./Events/error")();
+require("./Events/error.")();
 
 client.login(Token);
